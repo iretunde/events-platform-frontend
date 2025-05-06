@@ -33,7 +33,7 @@ const UpdatePassword = () => {
       const decoded = jwtDecode(token);
       const userId = decoded.user_id;
 
-      const response = await fetch(`http://localhost:5000/api/users/${userId}/password`, {
+      const response = await fetch(`https://events-platform-backend.onrender.com/api/users/${userId}/password`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

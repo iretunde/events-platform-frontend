@@ -22,7 +22,7 @@ const ManageEvents = () => {
     const user_id = decoded.user_id;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/events?created_by=${user_id}`);
+      const res = await fetch(`https://events-platform-backend.onrender.com/api/events?created_by=${user_id}`);
       const data = await res.json();
       setEvents(data.events);
     } catch (err) {
@@ -39,7 +39,7 @@ const ManageEvents = () => {
     try {
       const token = localStorage.getItem('token');
 
-      const res = await fetch(`http://localhost:5000/api/events/${event_id}`, {
+      const res = await fetch(`https://events-platform-backend.onrender.com/api/events/${event_id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,

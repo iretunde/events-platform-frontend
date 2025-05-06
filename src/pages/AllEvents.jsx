@@ -12,10 +12,10 @@ const AllEvents = () => {
       const token = localStorage.getItem('token');
 
       try {
-        const resEvents = await fetch('http://localhost:5000/api/events');
+        const resEvents = await fetch('https://events-platform-backend.onrender.com/api/events');
         const eventsData = await resEvents.json();
 
-        const resSignups = await fetch('http://localhost:5000/api/signups/user', {
+        const resSignups = await fetch('https://events-platform-backend.onrender.com/api/signups/user', {
           headers: { Authorization: `Bearer ${token}` },
         });
         const signupsData = await resSignups.json();

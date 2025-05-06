@@ -13,7 +13,7 @@ const PersonalDetails = () => {
         const decoded = JSON.parse(atob(token.split('.')[1]));
         const userId = decoded.user_id;
 
-        const response = await fetch(`http://localhost:5000/api/users/${userId}`, {
+        const response = await fetch(`https://events-platform-backend.onrender.com/api/users/${userId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

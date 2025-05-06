@@ -72,7 +72,7 @@ const CreateEvent = () => {
     try {
       const token = localStorage.getItem('token');
 
-      const response = await fetch('http://localhost:5000/api/events', {
+      const response = await fetch('https://events-platform-backend.onrender.com/api/events', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

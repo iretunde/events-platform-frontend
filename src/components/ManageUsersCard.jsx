@@ -5,7 +5,7 @@ const ManageUsersCard = ({ user, onRoleChange }) => {
   const handleRoleChange = async (newRole) => {
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://localhost:5000/api/users/${user.user_id}/role`, {
+      const res = await fetch(`https://events-platform-backend.onrender.com/api/users/${user.user_id}/role`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

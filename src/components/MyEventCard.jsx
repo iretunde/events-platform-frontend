@@ -13,7 +13,7 @@ const MyEventCard = ({ event, onRemove }) => {
       window.open(calendarUrl, '_blank'); // open Google Calendar link
 
       // Then mark as added on your backend
-      const response = await fetch(`http://localhost:5000/api/signups/${event.event_id}/calendar`, {
+      const response = await fetch(`https://events-platform-backend.onrender.com/api/signups/${event.event_id}/calendar`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

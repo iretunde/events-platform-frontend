@@ -30,7 +30,7 @@ const ResetPassword = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/api/users/reset-password/${token}`, {
+      const response = await fetch(`https://events-platform-backend.onrender.com/api/users/reset-password/${token}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ newPassword }),

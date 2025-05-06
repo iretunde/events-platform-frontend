@@ -9,7 +9,7 @@ const MyEvents = () => {
   const fetchUserEvents = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:5000/api/signups/user', {
+      const res = await fetch('https://events-platform-backend.onrender.com/api/signups/user', {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -30,7 +30,7 @@ const MyEvents = () => {
     const user_id = decoded.user_id;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/signups/${event_id}`, {
+      const res = await fetch(`https://events-platform-backend.onrender.com/api/signups/${event_id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

@@ -8,7 +8,7 @@ const AllEventsCard = ({ event, isAttending, onSignupSuccess }) => {
 
   const handleSignup = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/signups', {
+      const response = await fetch('https://events-platform-backend.onrender.com/api/signups', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
