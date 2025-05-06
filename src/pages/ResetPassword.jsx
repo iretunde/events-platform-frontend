@@ -1,20 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate} from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const ResetPassword = () => {
   const navigate = useNavigate();
+  const { token } = useParams();
 
-  const {token} = useParams()
-
+  const [tokenValid, setTokenValid] = useState(null); // null = loading, true = valid, false = invalid
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [tokenMissing, setTokenMissing] = useState(false);
 
   useEffect(() => {
-    if (!token) {
-      setTokenMissing(true);
-    }
+    const validateToken = async () => {
+      try {
+        const res = await fetch(`https://events-platform-backend.onrender.com/api/users/verify-reset-token/${token}`);
+        setTokenValid(res.ok);
+      } catch (err) {
+        setTokenValid(false);
+      }
+    };
+
+    validateToken();
   }, [token]);
 
   const handleSubmit = async () => {
@@ -48,7 +53,11 @@ const ResetPassword = () => {
     }
   };
 
-  if (tokenMissing) {
+  if (tokenValid === null) {
+    return <p style={{ textAlign: 'center', marginTop: '2rem' }}>Validating reset link...</p>;
+  }
+
+  if (tokenValid === false) {
     return (
       <div style={{
         display: 'flex',
@@ -57,12 +66,11 @@ const ResetPassword = () => {
         justifyContent: 'center',
         minHeight: '100vh',
         backgroundColor: 'white',
-        fontFamily: 'sans-serif',
-        transform: 'translateY(-5%)'
+        fontFamily: 'sans-serif'
       }}>
         <h1 style={{ color: 'red' }}>Invalid Reset Link</h1>
         <p>You can only reset your password using a valid link sent to your email.</p>
-        <button onClick={() => navigate('/login')}>Back to Login</button>
+        <button onClick={() => navigate('/all-events')}>Go to the homepage</button>
       </div>
     );
   }
@@ -75,13 +83,11 @@ const ResetPassword = () => {
       justifyContent: 'center',
       minHeight: '100vh',
       backgroundColor: 'white',
-      fontFamily: 'sans-serif',
-      transform: 'translateY(-5%)'
+      fontFamily: 'sans-serif'
     }}>
       <h1>Reset Password</h1>
 
       <form style={{ width: '440px', textAlign: 'center' }} onSubmit={(e) => e.preventDefault()}>
-        {/* New Password */}
         <div style={{ margin: '1rem auto', width: '60%' }}>
           <label style={{ display: 'block', marginBottom: '0.3rem', textAlign: 'left' }}>New Password:</label>
           <input
@@ -92,7 +98,6 @@ const ResetPassword = () => {
           />
         </div>
 
-        {/* Confirm New Password */}
         <div style={{ margin: '1rem auto', width: '60%' }}>
           <label style={{ display: 'block', marginBottom: '0.3rem', textAlign: 'left' }}>Confirm New Password:</label>
           <input
@@ -103,7 +108,6 @@ const ResetPassword = () => {
           />
         </div>
 
-        {/* Submit Button */}
         <button type="button" onClick={handleSubmit} style={{ marginTop: '1rem' }}>
           Submit
         </button>
