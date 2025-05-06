@@ -1,0 +1,6 @@
+[build]
+  command = "npm run build"
+  publish = "dist"  # or "build" if using Create React App
+
+[context.production.environment]
+  NODE_VERSION = "18"
