@@ -1,70 +1,138 @@
-# Getting Started with Create React App
+# Events Platform – Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Live Site: [https://fabulous-salamander-321bab.netlify.app](https://fabulous-salamander-321bab.netlify.app)
 
-## Available Scripts
 
-In the project directory, you can run:
+This is the **frontend** for the Events Platform application. It is a React-based single-page application that interacts with a RESTful API backend to allow users to manage and sign up for events.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## ✨ Project Overview
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The Events Platform is a full-stack web application that enables users to:
 
-### `npm test`
+* View upcoming events
+* Sign up for events
+* Manage events (admin/owner)
+* Update personal settings
+* Reset forgotten passwords
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 🔐 User Roles
 
-### `npm run build`
+There are **three distinct user roles**:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. **Owner**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   * Has full privileges
+   * Can appoint new admins (via backend logic)
+   * Can create, update, delete events
+   * Can manage their created events
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. **Admin**
 
-### `npm run eject`
+   * Can create and manage their own events
+   * Can sign up and cancel their attendance to events
+   * Can update their personal profile and password
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+3. **Customer**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   * Can view all events
+   * Can sign up and cancel attendance
+   * Can add events to their calendar
+   * Can update personal profile and password
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## ✉ Test Account Details
 
-## Learn More
+| Role     | Email                                                                 | Password     |
+| -------- | --------------------------------------------------------------------- | ------------ |
+| Owner    | [ownereventsplatform@gmail.com](mailto:ownereventsplatform@gmail.com) | Password123! |
+| Admin    | [eventsplatformuser1@gmail.com](mailto:eventsplatformuser1@gmail.com) | Password123! |
+| Customer | Create your own via the Register page                                 | N/A          |
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+To test as a customer, use the **Register** form to quickly create an account.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## ⚡ Key Features
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+* User registration and authentication
+* Role-based access control
+* Secure password reset with email verification
+* Event listing and details
+* Event creation and management (for admins/owners)
+* Calendar integration (add to Google Calendar)
+* Responsive and user-friendly interface
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 📅 Setup Instructions (Frontend)
 
-### Making a Progressive Web App
+### 1. Clone the repository
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+git clone https://github.com/iretunde/events-platform-frontend.git
+cd events-platform-frontend
+```
 
-### Advanced Configuration
+### 2. Install dependencies
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```bash
+npm install
+```
 
-### Deployment
+### 3. Environment variables
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+No `.env` file is required for the frontend.
 
-### `npm run build` fails to minify
+However, note:
+To run locally, you'll need to **connect the frontend to your local backend**:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* Run a global find/replace for:
+
+```
+https://fabulous-salamander-321bab.netlify.app/
+```
+
+* Replace it with:
+
+```
+http://localhost:3000/  (or wherever your backend is running)
+```
+
+### 4. Start the development server
+
+```bash
+npm start
+```
+
+---
+
+## 🚀 Deployment
+
+This project is deployed via **Netlify**.
+
+When deploying, ensure that:
+
+* Node version is set correctly (e.g., `16`) in `netlify.toml`
+* Any invalid route fallback is handled with redirect (optional but recommended)
+
+---
+
+## 📂 Project Structure
+
+```
+src/
+  components/     # Reusable UI components
+  pages/          # Page-level components (Login, Register, AllEvents etc.)
+  context/        # React Context API (Auth context)
+  utils/          # Utility functions
+```
+
+---
+
+## 🚩 Notes
+
+* This frontend consumes APIs provided by the separately deployed backend (see backend README).
+* Ensure CORS settings on backend allow your frontend domain in production.
